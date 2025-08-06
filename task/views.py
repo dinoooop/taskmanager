@@ -2,6 +2,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Task
 
+priorities = {
+    1: 'Low',
+    2: 'Medium',
+    3: 'High'
+}
+
 def add_task(request):
     if request.method == "POST":
         title = request.POST['title']
@@ -15,7 +21,6 @@ def add_task(request):
 
 def list_tasks(request):
     tasks = Task.objects.all().order_by('due_date')
-    priorities = { 1: 'Low', 2: 'Medium', 3: 'High' }
     return render(request, 'list_tasks.html', {'tasks': tasks, 'priorities': priorities})
 
 def edit_task(request, id):
@@ -27,7 +32,7 @@ def edit_task(request, id):
         task.priority = request.POST['priority']
         task.save()
         return redirect('list_tasks')
-    return render(request, 'edit_task.html', {'task': task})
+    return render(request, 'edit_task.html', {'task': task, 'priorities': priorities})
 
 # Delete
 def delete_task(request, id):

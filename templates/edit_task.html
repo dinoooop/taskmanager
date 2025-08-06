@@ -12,7 +12,7 @@
 <body>
   <div class="login-container">
     <h2>Edit Task</h2>
-    <form class="login-box" action="/tasks/edit/{{task.id}}" method="POST">
+    <form class="login-box" action="/tasks/edit/{{task.id}}/" method="POST">
       {% csrf_token %}
       <div class="input-group">
         <label for="title">Title</label>
@@ -24,14 +24,14 @@
       </div>
       <div class="input-group">
         <label for="due_date">Due date</label>
-        <input type="date" id="due_date" name="due_date" value="{{task.due_date}}">
+        <input type="date" id="due_date" name="due_date" value="{{task.due_date|date:'Y-m-d'}}">
       </div>
       <div class="input-group">
         <label for="priority">Priority</label>
         <select name="priority">
-          <option value="1">Low</option>
-          <option value="2">Medium</option>
-          <option value="3">High</option>
+          {% for key, value in priorities.items %}
+            <option value="{{key}}" {% if key == task.priority %}selected{% endif %}>{{value}}</option>
+          {% endfor %}
         </select>
       </div>
       
