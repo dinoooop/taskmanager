@@ -1,0 +1,41 @@
+{% load static %}
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tasks</title>
+  <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'simple.css' %}">
+
+</head>
+<body>
+  <div class="login-container">
+    <h2>Tasks</h2>
+    <p><a href="/tasks/add">Create New Task</a></p>
+    <table>
+        <tr>
+            <td>id</td>
+            <td>Title</td>
+            <td>Prority</td>
+            <td>Due Date</td>
+            <td>Action</td>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{task.id}}</td>
+            <td>{{task.title}}</td>
+            <td>{{ priorities|dict_get:task.priority }}</td>
+
+            <td>{{task.due_date|date:"M j, Y"}}</td>
+            <td>
+                <a href="{% url 'edit_task' id=task.id %}">Edit</a>
+                <a href="{% url 'delete_task' id=task.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+  </div>
+</body>
+</html>
