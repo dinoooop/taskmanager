@@ -1,0 +1,47 @@
+{% load static %}
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'assets/css/simple.css' %}">
+
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Edit Task</h2>
+        <div class="task-view">
+            <div class="input-group">
+                <label>Title:</label>
+                <span>{{ task.title }}</span>
+            </div>
+
+            <div class="input-group">
+                <label>Description:</label>
+                <p>{{ task.description }}</p>
+            </div>
+
+            <div class="input-group">
+                <label>Due date:</label>
+                <span>{{ task.due_date|date:'Y-m-d' }}</span>
+            </div>
+
+            <div class="input-group">
+                <label>Priority:</label>
+                <span>{{ priorities|dict_get:task.priority }}</span>
+            </div>
+
+            <div>
+                <button type="button" onclick="history.back()">Back</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

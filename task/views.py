@@ -34,6 +34,10 @@ def edit_task(request, id):
         return redirect('list_tasks')
     return render(request, 'edit_task.html', {'task': task, 'priorities': priorities})
 
+def view_task(request, id):
+    task = get_object_or_404(Task, id=id)
+    return render(request, 'view_task.html', {'task': task, 'priorities': priorities})
+
 # Delete
 def delete_task(request, id):
     task = get_object_or_404(Task, id=id)
